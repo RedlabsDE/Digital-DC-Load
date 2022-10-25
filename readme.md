@@ -1,6 +1,6 @@
 # Digtial DC Load Project
 
-![PCB assembled](documentation/PCB-assembled1.jpg "PCB assembled"){ width=60%,height:30px }
+![PCB assembled](documentation/PCB-assembled1.jpg "PCB assembled")
 
 
 **key features:**
@@ -31,8 +31,8 @@
 
 
 ## Hardware
-![Blockdiagram of PCB](documentation/CCS-Blockdiagram.png "Blockdiagram"){ width=60%,height:30px }
-![PCB not assembled](documentation/PCB-raw.jpg "PCB not assembled"){ width=60%,height:30px }
+![Blockdiagram of PCB](documentation/CCS-Blockdiagram.png "Blockdiagram")
+![PCB not assembled](documentation/PCB-raw.jpg "PCB not assembled")
 
 ### Jumper Settings
 Via multiple jumpers the used operating ranges can be configured.
