@@ -1,0 +1,58 @@
+Step-by-step manual calibration of Voltage/Current Measurement and Current setting
+
+
+-------------------------------------
+VLOAD
+-------------------------------------
+Manually apply external voltage to VLOAD (here: 10V and 20V) and read back ADC values:
+
+//Measurement #1
+V1= 	10000 mV
+ADC1= 	13254	
+
+//Measurement #2
+V2= 	20000 mV
+ADC2= 	26516	
+
+-------------------------------------
+Calaculate slope and offset of voltage measurement, using measurement results:
+
+slope = (V2-V1)/(ADC2-ADC1)
+offset = V1 - slope*ADC1
+slope = (20000mV-10000mV)/(26516 - 13254) = 10000.0/13262  = 0.75403
+offset = V1 - [ (10000.0/13262) * 13254 ] = 4
+
+
+
+-------------------------------------
+ILOAD: (C9:3n3, JP2 closed)
+-------------------------------------
+Manually set DAC in GUI "Calibration" page and manually measure the current with multimeter (here: 100mA and 500mA), write down set DAC value and read back ADC values:
+
+//Measurement #1
+I1=	100mA
+DAC1=	46
+ADC1=	320
+
+//Measurement #2
+I2=	500mA
+DAC2=	211
+ADC2=	1638
+
+-------------------------------------
+Calaculate slope and offset of current control, using measurement results:
+slope = (I2-I1)/(DAC2-DAC1)
+offset = I1 - slope*DAC1
+
+slopeDAC = (500-100)/(211-46) =  400/165 = 2.42
+offsetDAC = 100 - (2.42)*46 = -11,5
+
+-------------------------------------
+Calaculate slope and offset of current measurement, using measurement results:
+slope = (I2-I1)/(ADC2-ADC1)
+offset = I1 - slope*ADC1
+
+slopeADC = (500-100)/(1638-320) = 400/1318 = 0.303
+offsetADC = 100 - (0.303)*320 = 3
+
+
