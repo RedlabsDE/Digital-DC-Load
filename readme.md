@@ -1,6 +1,6 @@
 # Digtial DC Load Project
 
-![PCB assembled](../Digital-DC-Load/documentation/PCB-assembled1.jpg "PCB assembled"){ width=60%,height:30px }
+![PCB assembled](documentation/PCB-assembled1.jpg "PCB assembled"){ width=60%,height:30px }
 
 
 **key features:**
@@ -31,8 +31,8 @@
 
 
 ## Hardware
-![Blockdiagram of PCB](../Digital-DC-Load/documentation/CCS-Blockdiagram.png "Blockdiagram"){ width=60%,height:30px }
-![PCB not assembled](../Digital-DC-Load/documentation/PCB-raw.jpg "PCB not assembled"){ width=60%,height:30px }
+![Blockdiagram of PCB](documentation/CCS-Blockdiagram.png "Blockdiagram"){ width=60%,height:30px }
+![PCB not assembled](documentation/PCB-raw.jpg "PCB not assembled"){ width=60%,height:30px }
 
 ### Jumper Settings
 Via multiple jumpers the used operating ranges can be configured.
@@ -69,8 +69,8 @@ An example PC-based user interface (written in "Processing"), for the use with t
 	````
 ### Usage ###
 In the "Control" page, all measured values are displayed in SI-units. The user can set the desired load current in mA.
-![GUI Control](../Digital-DC-Load/documentation/GUI-CCS-Control.png "GUI Control")
+![GUI Control](documentation/GUI-CCS-Control.png "GUI Control")
 
 In the "Calibration" page, the raw ADC values are displayed. The user can set the raw DAC value.
-![GUI Control](../Digital-DC-Load/documentation/GUI-CCS-Calibration.png "GUI Calibration")
+![GUI Control](documentation/GUI-CCS-Calibration.png "GUI Calibration")
 
