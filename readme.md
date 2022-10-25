@@ -34,6 +34,8 @@
 ![Blockdiagram of PCB](documentation/CCS-Blockdiagram.png "Blockdiagram")
 ![PCB not assembled](documentation/PCB-raw.jpg "PCB not assembled")
 
+**Order PCB:** https://aisler.net/p/YHESFYKF
+
 ### Jumper Settings
 Via multiple jumpers the used operating ranges can be configured.
 
@@ -74,3 +76,6 @@ In the "Control" page, all measured values are displayed in SI-units. The user c
 In the "Calibration" page, the raw ADC values are displayed. The user can set the raw DAC value.
 ![GUI Control](documentation/GUI-CCS-Calibration.png "GUI Calibration")
 
+
+
+... find other projects: https://redlabs.de/
