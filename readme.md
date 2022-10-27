@@ -2,6 +2,7 @@
 
 ![PCB assembled](documentation/PCB-assembled1.jpg "PCB assembled")
 
+![Blockdiagram of example usecases](documentation/CCS-Example-Usecases.png "Example Usecases")
 
 **key features:**
 - linear constant curren cink
@@ -13,6 +14,12 @@
 	- read additional external voltage
 	- read temperature 
 - option to set current via external voltage
+
+**example application:**
+- charge / discharge battery (control & measure current and voltage)
+- measure & log current/voltage (use example setup to send data to PC)
+- stess test of power supply
+
 
 ## Repository Overview
 - **documentation**
@@ -47,16 +54,30 @@ Via multiple jumpers the used operating ranges can be configured.
 | V_extern range | JP4 | high 0-24V | 0-4V |
 | ADC I2C Addr (A2,A1,A0)| R8 | 0,0,1 | 0,0,0 |
 
+# Example Setup
+![Blockdiagram of example setup](documentation/CCS-Example-Setup.png "Example Setup")
 
 ## Example Arduino Control
 
-In the Arduino Code, the settings should be set according to physical state of the jumpers:
-```
-    /// Write board jumper settings (like set on PCB)
-    myLoad.SetJumperSetting(JP2_CURRENT,Jumper_Closed);
-    myLoad.SetJumperSetting(JP3_VLOAD,Jumper_Open);
-    myLoad.SetJumperSetting(JP4_VEXT,Jumper_Open);  
-```
+### Connect Arduino to CCS-PCB
+| Signal      	| Arduino Pin    |
+|---------------|-------|
+| I2C_VDD (J2, pin1)    	| 5V 	|
+| I2C_SDA (J2, pin2) 		| A4    |
+| I2C_SCL (J2, pin3)    	| A5 	|
+| I2C_GND (J2, pin4)    	| GND 	|
+| SUPPLY_+5V (J1, pin1)    	| 5V 	|
+| SUPPLY_GND (J1, pin2)    	| GND 	|
+
+### Configure CCS-PCB according to your application
+- See chapter "Jumper Settings" to select your operating range
+- In the Arduino Code, the settings should be set according to physical state of the jumpers:
+	```
+		/// Write board jumper settings (like set on PCB)
+		myLoad.SetJumperSetting(JP2_CURRENT,Jumper_Closed);
+		myLoad.SetJumperSetting(JP3_VLOAD,Jumper_Open);
+		myLoad.SetJumperSetting(JP4_VEXT,Jumper_Open);  
+	```
 
 
 ## Example User Interface
