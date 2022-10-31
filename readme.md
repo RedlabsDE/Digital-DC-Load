@@ -5,15 +5,15 @@
 ![Blockdiagram of example usecases](documentation/CCS-Example-Usecases.png "Example Usecases")
 
 **key features:**
-- linear constant curren cink
+- linear constant curren sink
 - galvanic isolated
-- selectable operating range
+- selectable operating range (high/low current/voltage)
 - controlled via I2C
 	- write & read load current
 	- read load voltage
 	- read additional external voltage
 	- read temperature 
-- option to set current via external voltage
+- manual option: set current via external voltage (or potentiometer)
 
 **example application:**
 - charge / discharge battery (control & measure current and voltage)
