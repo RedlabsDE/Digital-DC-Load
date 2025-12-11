@@ -153,7 +153,7 @@ void setup()
      .setRange(0,100) //100%
      .setCaptionLabel("[%] Brightness") 
      .setSize(SLIDER_WIDTH, SLIDER_HEIGHT) 
-     .setDecimalPrecision(1) 
+     .setDecimalPrecision(0) 
      .setScrollSensitivity(0.1) //step=1
      .setFont(font)
      ; 
@@ -172,7 +172,7 @@ void setup()
   // create a new button
   cp5.addButton("BTNsetCurrent")
      .setValue(0)
-     .setPosition(SLIDER_POS_X + SLIDER_WIDTH*3+100 ,0*SLIDER_DISTANCE + 50)
+     .setPosition(SLIDER_POS_X + SLIDER_WIDTH*3.2+100 ,0*SLIDER_DISTANCE + 50)
      .setSize(50,50)
      .setCaptionLabel("set") 
      .setFont(font)
@@ -180,7 +180,7 @@ void setup()
 
    cp5.addButton("BTNsetBrightness")
      .setValue(0)
-     .setPosition(SLIDER_POS_X + SLIDER_WIDTH*4+100 ,0*SLIDER_DISTANCE + 50)
+     .setPosition(SLIDER_POS_X + SLIDER_WIDTH*3.2+100 ,1.1*SLIDER_DISTANCE + 50)
      .setSize(50,50)
      .setCaptionLabel("set") 
      .setFont(font)
@@ -509,7 +509,26 @@ public void BTNsetCurrent(int theValue)
 // 's'a'...'e' 0-99999
 public void BTNsetBrightness(int theValue) 
 {
-  //send mA 
+ processBrightnessChange(0);
+}
+
+
+// 's'f'...'e' 0-4095
+public void BTNsetDAC(int theValue) 
+{
+  //send raw DAC value
+  myPort.write('s');
+  myPort.write('f');
+  float currentToSet = cp5.getController("sliderSetRawDAC").getValue();
+  int current = (int)(currentToSet);
+  myPort.write(str(current));
+  myPort.write('e'); 
+  
+}
+
+void processBrightnessChange(float brightness)
+{
+    //send mA 
   
   myPort.write('s');
   myPort.write('a');
@@ -536,15 +555,8 @@ public void BTNsetBrightness(int theValue)
 }
 
 
-// 's'f'...'e' 0-4095
-public void BTNsetDAC(int theValue) 
+
+public void sliderSetBrightness(float sliderValue)
 {
-  //send raw DAC value
-  myPort.write('s');
-  myPort.write('f');
-  float currentToSet = cp5.getController("sliderSetRawDAC").getValue();
-  int current = (int)(currentToSet);
-  myPort.write(str(current));
-  myPort.write('e'); 
-  
+  processBrightnessChange(sliderValue);
 }
