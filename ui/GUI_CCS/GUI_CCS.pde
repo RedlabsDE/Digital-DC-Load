@@ -148,6 +148,16 @@ void setup()
      .setFont(font)
      ; 
      
+   cp5.addSlider("sliderSetBrightness")
+     .setPosition(SLIDER_POS_X + SLIDER_WIDTH + 200 ,1*SLIDER_DISTANCE + 50)
+     .setRange(0,100) //100%
+     .setCaptionLabel("[%] Brightness") 
+     .setSize(SLIDER_WIDTH, SLIDER_HEIGHT) 
+     .setDecimalPrecision(1) 
+     .setScrollSensitivity(0.1) //step=1
+     .setFont(font)
+     ; 
+
   cp5.addSlider("sliderSetRawDAC")
      .setPosition(SLIDER_POS_X + SLIDER_WIDTH + 200 ,0*SLIDER_DISTANCE + 50)
      .setRange(0,4095)
@@ -167,7 +177,15 @@ void setup()
      .setCaptionLabel("set") 
      .setFont(font)
      ;
-     
+
+   cp5.addButton("BTNsetBrightness")
+     .setValue(0)
+     .setPosition(SLIDER_POS_X + SLIDER_WIDTH*4+100 ,0*SLIDER_DISTANCE + 50)
+     .setSize(50,50)
+     .setCaptionLabel("set") 
+     .setFont(font)
+     ;    
+
   cp5.addButton("BTNsetDAC")
      .setValue(0)
      .setPosition(SLIDER_POS_X + SLIDER_WIDTH*3+100 ,0*SLIDER_DISTANCE + 50)
@@ -488,6 +506,34 @@ public void BTNsetCurrent(int theValue)
   myPort.write('e'); 
 }
 
+// 's'a'...'e' 0-99999
+public void BTNsetBrightness(int theValue) 
+{
+  //send mA 
+  
+  myPort.write('s');
+  myPort.write('a');
+  float brightnessToSet = cp5.getController("sliderSetBrightness").getValue();
+  float maxCurrent = 700;
+  //float currentToSet = maxCurrent * (brightnessToSet/100.0);
+
+  //
+// Normalize brightness to 0-1 range
+  float normalized = constrain(brightnessToSet, 0, 100) / 100.0;
+  
+  // Apply gamma correction (gamma = 2.2)
+  float gamma = 2.2;
+  float corrected = pow(normalized, gamma);
+  
+  // Scale to LED current range (0-700mA)
+  float current = corrected * 700.0;
+  //
+
+  cp5.getController("sliderSetCurrent").setValue(current);
+  int currentINT = (int)(current);
+  myPort.write(str(currentINT));
+  myPort.write('e'); 
+}
 
 
 // 's'f'...'e' 0-4095
