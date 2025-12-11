@@ -85,6 +85,15 @@ void setup()
      .setFont(font)
      ;
      
+  cp5.addSlider("sliderPower")
+     .setPosition(SLIDER_POS_X,5*SLIDER_DISTANCE + 50)
+     .setRange(0,2)//Range 2W (change by settings)
+     .setCaptionLabel("[W]  Load Power") 
+     .lock()
+     .setSize(SLIDER_WIDTH, SLIDER_HEIGHT) 
+     .setDecimalPrecision(3) 
+     .setFont(font)
+     ;
    ///////////////////////////////////////////////////////////////////////////////
    // Show Calibration / raw data
   cp5.addSlider("sliderRawCurrent")
@@ -406,6 +415,9 @@ void actSerialCommand(char type, long value)
   {
     case 'a':
       cp5.getController("sliderCurrent").setValue(value/1000.0); // current received in mA (show in A)
+      float power = (value/1000.0) * cp5.getController("sliderVoltLoad").getValue();
+      cp5.getController("sliderPower").setValue(power); 
+      
     break;
     case 'b':
       cp5.getController("sliderVoltLoad").setValue(value/1000.0); // voltage received in mV (show in V)
